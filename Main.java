@@ -1,50 +1,70 @@
 package act12_codigo_intermedio;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
   Cervantes Mora Juan Pablo
   Muñoz Madriz Nadya Janneth
   Ramirez Torres Jesus Adrian
  */
-
 public class Main {
+    private static final List<String> INTEGRANTES = Arrays.asList(
+            "Cervantes Mora Juan Pablo",
+            "Muñoz Madriz Nadya Janneth",
+            "Ramirez Torres Jesus Adrian");
+
     public static void main(String[] args) {
-        System.out.println("ACTIVIDAD 12: CÓDIGO INTERMEDIO 3AC");
-        System.out.println("Integrantes:");
-        System.out.println("  Cervantes Mora Juan Pablo");
-        System.out.println("  Muñoz Madriz Nadya Janneth");
-        System.out.println("  Ramirez Torres Jesus Adrian\n");
+        System.out.println("Integrantes: " + String.join(", ", INTEGRANTES));
+        System.out.println("ACTIVIDAD 13: CÓDIGO INTERMEDIO PARA CONTROL DE FLUJO");
+        System.out.println("Demostración: condicionales, ciclos, métodos y clases\n");
 
-        Generador3AC gen = new Generador3AC();
+        Generador3AC generador = new Generador3AC();
 
-        System.out.println("Evaluando códigos de prueba fuente y generando 3AC \n");
+        generador.emitir("# 1. Estructura if-else: asigna el mayor valor");
+        generador.generarIfElse("x > y",
+                Arrays.asList("z = x"),
+                Arrays.asList("z = y"));
 
-        // Códigos de prueba ---
+        generador.emitir("# 2. Estructura switch: selección por casos y default");
+        Map<String, List<String>> casos = new LinkedHashMap<>();
+        casos.put("1", Arrays.asList("result = \"Uno\""));
+        casos.put("2", Arrays.asList("result = \"Dos\""));
+        generador.generarSwitch("n", casos, Arrays.asList("result = \"Otro\""));
 
-        // Asignación de constantes
-        gen.procesarAsignacionConstante("x", "5");
-        gen.procesarAsignacionConstante("y", "10");
+        generador.emitir("# 3. Ciclo while");
+        generador.generarWhile("i < 10", Arrays.asList("i = i + 1"));
 
-        // Uso de variables y operaciones
-        gen.procesarAsignacionExpresion("z", "x + y");
+        generador.emitir("# 4. Ciclo for: inicialización, condición, cuerpo e incremento");
+        generador.generarFor("i = 0", "i < 5", "i = i + 1",
+                Arrays.asList("sum = sum + i"));
 
-        // Expresiones anidadas
-        gen.procesarAsignacionExpresion("total", "(a + b) * (c - d)");
+        generador.emitir("# 5. Ciclo do-while: condición comprobada al final");
+        generador.generarDoWhile(Arrays.asList("count = count + 1"), "count < 10");
 
-        // Expresiones lógicas
-        gen.procesarAsignacionExpresion("flag", "(x > y) && (z < 10)");
+        generador.emitir("# 6. Definición y llamada de método");
+        String etiquetaSuma = generador.generarDefinicionMetodo("suma",
+                Arrays.asList("a", "b"), new ArrayList<String>(), "a + b");
+        generador.generarLlamadaMetodo(etiquetaSuma, Arrays.asList("5", "3"), "result");
 
-        // Gestión de errores (División por cero y Tipos)
-        gen.validarDivisionCero("a", "b");
-        gen.validarTipos("total", "10", "\"string\"");
+        generador.emitir("# 7. Clase, atributo, instancia y llamada a método de instancia");
+        generador.generarDefinicionClase("Persona", Arrays.asList("edad"));
+        generador.generarDefinicionMetodo("Persona", "celebrarCumpleanos",
+                Arrays.asList("this"), Arrays.asList("this.edad = this.edad + 1"), null);
+        generador.generarCreacionObjeto("p", "Persona");
+        generador.generarLlamadaMetodoObjeto("p", "Persona", "celebrarCumpleanos",
+                new ArrayList<String>(), null);
 
-        // Resultado
-        gen.mostrarCodigoIntermedio();
+        generador.emitir("# 8. Ejemplos de validación semántica");
+        generador.validarDivisionCero("a", "b");
+        generador.validarTipos("total", "10", "\"texto\"");
 
-        System.out.println("\n FIN - ACTIVIDAD 12");
-        System.out.println("  Cervantes Mora Juan Pablo");
-        System.out.println("  Muñoz Madriz Nadya Janneth");
-        System.out.println("  Ramirez Torres Jesus Adrian\n");
+        System.out.println();
+        generador.mostrarCodigoIntermedio();
+        System.out.println("\nFIN DE LA EJECUCIÓN");
+        System.out.println("Integrantes: " + String.join(", ", INTEGRANTES));
     }
 }
