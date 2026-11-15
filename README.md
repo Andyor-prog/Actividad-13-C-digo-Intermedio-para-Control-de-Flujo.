@@ -31,3 +31,8 @@ java -cp build act12_codigo_intermedio.PruebasGenerador3AC
 Las pruebas comprueban las instrucciones generadas para cada estructura y que
 se rechacen entradas inválidas como condiciones vacías, bloques nulos e
 identificadores de método mal formados.
+
+## Reporte
+
+El reporte PDF con capturas de ejecución, pruebas y código fuente está en
+`CervantesMoraJuanPablo_MunozMadrizNadyaJanneth_RamirezTorresJesusAdrian_A13_CodigoIntermedioControlDeFlujo.pdf`.
