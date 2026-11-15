@@ -13,7 +13,7 @@ condicionales, selección, ciclos, métodos y objetos.
 En PowerShell:
 
 ```powershell
-javac -encoding UTF-8 -d build Generador3AC.java Main.java PruebasGenerador3AC.java
+javac -encoding UTF-8 -d build src\act12_codigo_intermedio\Generador3AC.java src\act12_codigo_intermedio\Main.java src\act12_codigo_intermedio\PruebasGenerador3AC.java
 java -cp build act12_codigo_intermedio.Main
 ```
 
